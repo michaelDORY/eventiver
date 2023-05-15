@@ -28,6 +28,8 @@ const updateEventValidation = [
   body('time', 'Enter correct time').optional().isTime(),
   body('location', 'Enter correct location').optional().isString(),
   body('eventTypeId', 'Enter correct event type id').optional().isNumeric(),
+  body('guests', 'Enter correct guest ids').optional().isArray(),
+  body('guests.*', 'Enter correct guest ids').isNumeric(),
   validateRequestBody,
 ]
 

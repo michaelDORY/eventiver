@@ -2,6 +2,7 @@ const { DataTypes } = require('sequelize')
 
 const { sequelize } = require('../../db.js')
 const { ORDER_STATUSES } = require('../../constants.js')
+const {CURRENCY} = require("../../constants");
 
 const Order = sequelize.define('order', {
   id: {
@@ -19,8 +20,10 @@ const Order = sequelize.define('order', {
     type: DataTypes.FLOAT,
     allowNull: false,
   },
-  timeCreated: {
-    type: DataTypes.DATE,
+  currency: {
+    type: DataTypes.ENUM(...Object.values(CURRENCY)),
+    allowNull: false,
+    defaultValue: CURRENCY.usd,
   },
   timeConfirmed: {
     type: DataTypes.DATE,

@@ -12,7 +12,7 @@ const FoodRouter = new Router()
 FoodRouter.get(
   '/',
   authMiddleware,
-  rolesMiddleware([USER_ROLES.foodProvider]),
+  rolesMiddleware(Object.values(USER_ROLES)),
   FoodController.getMenuItems
 )
 FoodRouter.get(

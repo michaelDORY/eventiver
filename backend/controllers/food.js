@@ -16,9 +16,16 @@ const getMenuItem = async (req, res, next) => {
 }
 
 const getMenuItems = async (req, res, next) => {
+  const {foodProviderId: foodProviderIdFromQuery} = req.query
+  const foodProviderId = req.foodProviderId || foodProviderIdFromQuery
+
+  if (!foodProviderId) {
+    return next(ApiError.badRequest([], 'Food provider id is required'))
+  }
+
   try {
     const menuItems = await MenuItemModel.findAll({
-      where: { foodProviderId: req.foodProviderId },
+      where: { foodProviderId: +foodProviderId },
       include: [CategoryModel],
     })
 
