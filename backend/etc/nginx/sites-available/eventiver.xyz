@@ -1,0 +1,16 @@
+server {
+        listen 5003;
+        listen [::]:5003;
+
+        root /var/www/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name eventiver.xyz;
+
+        location / {
+            proxy_set_header   X-Forwarded-For $remote_addr;
+        	proxy_set_header   Host $http_host;
+        	proxy_pass         http://localhost:3000;
+            try_files $uri $uri/ =404;
+        }
+}
