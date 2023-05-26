@@ -1,16 +1,19 @@
 import random
 
+
 class Sensor:
     def __init__(self, name, type, unit, location):
         self.name = name
-        self.type = type
         self.unit = unit
+        self.type = type
         self.location = location
 
-    def read_data(self):
+    def read_data(self, event_id):
         return {
             "name": self.name,
             "value": random.randint(8, 30),
             "unit": self.unit,
-            "location": self.location
+            "location": self.location,
+            "eventId": event_id,
+            "type": self.type,
         }
