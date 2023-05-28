@@ -24,4 +24,20 @@ const addDeviceEventValidation = [
   validateRequestBody,
 ]
 
-module.exports = { addDeviceValidation, addDeviceEventValidation }
+const addDeviceEventFromAWSValidation = [
+  body('name', 'Name should consist of at least 3 letters')
+    .isString()
+    .isLength({ min: 3 }),
+  body('value', 'Enter correct value').isNumeric(),
+  body('unit', 'Enter correct unit').isString(),
+  body('location', 'Enter correct location').isString(),
+  body('eventId', 'Enter correct event id').optional().isNumeric(),
+  body('deviceId', 'Enter correct device id').optional().isNumeric(),
+  validateRequestBody,
+]
+
+module.exports = {
+  addDeviceValidation,
+  addDeviceEventValidation,
+  addDeviceEventFromAWSValidation,
+}
