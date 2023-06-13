@@ -102,6 +102,10 @@ const register = async (req, res, next) => {
 const login = async (req, res, next) => {
   const { email, password } = req.body
 
+  if (!email || !password) {
+    return next(ApiError.badRequest([], 'Incorrect Email or password'))
+  }
+
   const user = await UserModel.findOne({
     where: { email },
   })
@@ -148,11 +152,15 @@ const getInfo = async (req, res, next) => {
     where: {
       id: req.userId,
     },
-    include: [
-      {
-        model: roleModelMap[userRole],
-      },
-    ],
+    ...(roleModelMap[userRole]
+      ? {
+          include: [
+            {
+              model: roleModelMap[userRole],
+            },
+          ],
+        }
+      : {}),
   })
   if (!user) return next(ApiError.unauthorized())
 

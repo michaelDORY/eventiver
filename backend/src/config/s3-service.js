@@ -1,9 +1,5 @@
 require('dotenv').config()
-const {
-  S3Client,
-  CreateBucketCommand,
-  PutObjectCommand,
-} = require('@aws-sdk/client-s3')
+const { S3Client, PutObjectCommand } = require('@aws-sdk/client-s3')
 const { v4: uuidv4 } = require('uuid')
 
 const s3Upload = async (req, files) => {

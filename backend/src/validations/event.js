@@ -9,9 +9,12 @@ const addEventValidation = [
     .isString()
     .isLength({ min: 3 }),
   body('date', 'Enter correct date').isISO8601().toDate(),
-  body('time', 'Enter correct time').isTime(),
+  body('time', 'Enter correct time').isTime({
+    hourFormat: 'hour24',
+  }),
   body('location', 'Enter correct location').isString(),
   body('eventTypeId', 'Enter correct event type id').isNumeric(),
+  body('managerId', 'Enter correct event type id').optional().isNumeric(),
   validateRequestBody,
 ]
 
@@ -25,7 +28,9 @@ const updateEventValidation = [
     .isString()
     .isLength({ min: 3 }),
   body('date', 'Enter correct date').isISO8601().toDate(),
-  body('time', 'Enter correct time').optional().isTime(),
+  body('time', 'Enter correct time').optional().isTime({
+    hourFormat: 'hour24',
+  }),
   body('location', 'Enter correct location').optional().isString(),
   body('eventTypeId', 'Enter correct event type id').optional().isNumeric(),
   body('guests', 'Enter correct guest ids').optional().isArray(),

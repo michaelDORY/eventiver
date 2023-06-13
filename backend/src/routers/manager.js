@@ -7,6 +7,20 @@ const { USER_ROLES } = require('../constants')
 
 const ProfileRouter = new Router()
 
+ProfileRouter.get(
+  '/',
+  authMiddleware,
+  rolesMiddleware([USER_ROLES.admin]),
+  ManagerController.getManagersInfo
+)
+
+ProfileRouter.get(
+  '/:managerId',
+  authMiddleware,
+  rolesMiddleware([USER_ROLES.admin]),
+  ManagerController.getManagerInfo
+)
+
 ProfileRouter.post(
   '/:managerId/rate',
   authMiddleware,

@@ -10,7 +10,11 @@ const errorsMiddleware = require('./middlewares/errors.js')
 
 const app = express()
 
-app.use(cors())
+app.use(
+  cors({
+    exposedHeaders: ['Content-Range', 'X-Content-Range'],
+  })
+)
 app.use(bodyParser.json())
 
 sequelize
